@@ -64,11 +64,19 @@ var orm = {
     },
 
     updateOne: function (table, objColVals, condition, cb) {
+        console.log("before:",objColVals);
+       if (objColVals == true) {
+           objColVals = 1
+       }
+       else {
+           objColVals = 0
+       };
+       console.log("after:",objColVals);
         var queryString = "UPDATE " + table;
-
-        queryString += " SET ";                         //add SET to queryString
-        queryString += objToSql(objColVals);           //add objToSql function, above, with objColVals array being passed in the parameters
-        queryString += " WHERE ";                     //add "WHERE"
+        
+        queryString += " SET devoured = ";                         //add SET to queryString
+        queryString += objColVals;           //add objToSql function, above, with objColVals array being passed in the parameters
+        queryString += " WHERE id = ";                     //add "WHERE"
         queryString += condition;                    //add the condition...is the burger being devoured or not? 
 
         console.log(queryString);
